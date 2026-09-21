@@ -1,0 +1,40 @@
+# Pinned Python dependencies for CI — the Python side's answer to Cargo.lock.
+#
+# WHY PINNED:
+# This crate owns the §6 contract, and it has TWO implementations of it: `src/`
+# (Rust) and `python/nettls.py`. The Rust side builds with `--locked` — every
+# transitive dependency is nailed down, because a crate carrying security should
+# build the same tomorrow as it does today.
+#
+# The Python side had no equivalent. CI ran
+#     pip install pytest cryptography argon2-cffi
+# which means "the latest version, whatever that is on the day". The consequence
+# is that CI can fall over on a day when nothing in the repository changed — and
+# worse, it can stop falling over on something it ought to catch, with nobody
+# seeing that the ground moved. Half the contract was pinned to the byte; the
+# other half floated.
+#
+# `cryptography` is not a test dependency here. It IS the crypto implementation on
+# the Python side (Ed25519, ECDSA P-256, X25519, AES-GCM), and it deserves at
+# least the treatment a Rust dependency gets.
+#
+# TRANSITIVES ARE INCLUDED ON PURPOSE. Pinning only the direct ones would let
+# `cffi` or `pycparser` shift under the argon2 bindings — which is exactly what
+# Cargo.lock exists to prevent.
+#
+# UPDATING: bump deliberately, and let CI run the cross-test and the ring test on
+# the new version before it is committed. That is the whole point of this being a
+# file rather than a command line.
+#
+# Regenerate:  pip install -U pytest cryptography argon2-cffi && pip freeze | sort
+
+argon2-cffi==25.1.0
+argon2-cffi-bindings==25.1.0
+cffi==2.1.1
+cryptography==50.0.0
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+pycparser==3.0
+Pygments==2.20.0
+pytest==9.1.1

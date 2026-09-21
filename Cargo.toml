@@ -1,0 +1,97 @@
+[package]
+name = "nettls"
+version = "0.9.0"
+edition = "2021"
+rust-version = "1.75"
+license = "MIT OR Apache-2.0"
+description = "Shared TLS building block: self-signed certificates with SANs, PEM in and out, SHA-256 fingerprint pinning, and asynchronous certificate rotation with two-signature continuity."
+repository = "https://github.com/rjorgensen123/NetTLS"
+authors = ["Roger Jorgensen <rogerj@gmail.com>"]
+keywords = ["tls", "rustls", "pinning", "certificate", "rotation"]
+categories = ["cryptography", "network-programming", "authentication"]
+
+[dependencies]
+# ── THE PROVIDER TRAP (read this before touching a single version line) ─────── #
+# rustls 0.23's DEFAULT features are
+#     ["aws_lc_rs", "logging", "prefer-post-quantum", "std", "tls12"]
+# — so `rustls = "0.23"` ALWAYS pulls in aws-lc-rs. Cargo features are
+# ADDITIVE, so `features = ["ring"]` WITHOUT `default-features = false` does not
+# mean "ring instead of", it means "ring IN ADDITION TO". And rustls fails
+# CLOSED when zero or more than one provider is compiled in: «no process-level
+# CryptoProvider available». That is why the 2026-07 attempt stranded
+# (case L2-014 ch. 2.1).
+#
+# The rules, which apply to the ENTIRE dependency tree of consuming services:
+#   1. `default-features = false` on rustls, tokio-rustls, rcgen — always.
+#   2. axum-server: use `tls-rustls-no-provider`, NEVER `tls-rustls`
+#      (the latter is defined as ["tls-rustls-no-provider", "rustls/aws-lc-rs"]).
+#   3. Install the provider explicitly: `nettls::install_crypto_provider()`.
+#   4. Build configs with `builder_with_provider(...)`, never `builder()`.
+#   5. CI fence: `! grep -q '^name = "aws-lc-sys"' Cargo.lock`.
+# Points 3 and 4 keep this crate correct EVEN IF a transitive dependency one day
+# pulls in a second provider. That is the whole reason the crate exists.
+rustls = { version = "0.23.43", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+# `tls12` is here ON PURPOSE: without it we lock out everything that is not
+# TLS 1.3. Looks like cleanup, is a compatibility regression (L2-014 ch. 8.2).
+
+# Self-signed generation. The ring backend ⇒ ECDSA/Ed25519, NOT RSA
+# (`KeyGenerationUnavailable`). We use ECDSA P-256 — which is also the choice
+# with the BEST backwards compatibility (IE11/Win7 has ECDHE_ECDSA+GCM, but not
+# ECDHE_RSA+GCM). Ed25519 certificates are supported by no mainstream browser.
+rcgen = { version = "0.14.8", default-features = false, features = ["crypto", "pem", "ring"] }
+
+# PEM loading (cert chain + private key) and the shared DER types.
+rustls-pki-types = "1.15.1"
+
+# Expiry date + SAN inspection of loaded certificates (expiry warnings, /status).
+x509-parser = "0.18.1"
+
+# Serialization of the §6 messages. The crate OWNS the contract
+# (SPEC-nettls §6.14), and then it must own the serialization too — otherwise
+# every service serializes its own way, and we are back to the hex-vs-base64
+# divergence in a new shape.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Locking local state at rest (SIKKERHETSMODELL §8.4): argon2id as the KDF and
+# the FAFN blob format. A second at-rest format would mean two things to keep
+# correct, and one of them would never get reviewed.
+# The path entry is for local development, where both crates are checked out
+# side by side. The version and registry are what a publish resolves against.
+# Since 0.5 krypto also carries ALL the primitives this crate used to pull in
+# itself: signatures (Ed25519 / ECDSA P-256), X25519 key agreement, canonical
+# hex, SHA-256, ct_eq and CSPRNG bytes. That is why there is no `ring` and no
+# `x25519-dalek` dependency here anymore — nettls implements no primitive of
+# its own, it owns formats (NETENV, the lockbox file, rotation proofs) and the
+# X.509/TLS domain.
+krypto = { path = "../krypto", version = "0.7", registry = "gitea" }
+
+# AEGIS-256 as a TLS 1.3 record AEAD — OUR OWN suite, a deliberate deviation
+# (0.8.3, see `src/aegis.rs`): rustls has no AEGIS and no 32-byte IV, so the
+# seam lives here. Same primitive crate krypto uses at rest (by a co-author of
+# the draft, vector-verified). Consumers opt in via `TransportCipher::Aegis256`;
+# the default transport is AES-256-GCM. Replaced, not extended, when rustls
+# ships the standard suite (L2-076).
+aegis = "0.9"
+
+# Guaranteed wiping of the short-lived buffers that cannot be a SecretBuf
+# (0.8.3): the PEM a consumer hands in, DER intermediates, and rustls' own
+# `PrivateKeyDer` (wrapped in `Zeroizing`). Already in the tree via
+# rustls-pki-types; a direct dependency so the crate can use it under
+# `forbid(unsafe_code)`. Long-lived keys are `krypto::SecretBuf` (see `secret.rs`).
+zeroize = "1"
+
+# Validity window for rcgen (`CertificateParams::not_before/not_after`).
+time = { version = "0.3", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+# The tests need SecretString to set a password on the Announcer.
+krypto = { path = "../krypto", version = "0.7", registry = "gitea" }
+# Only for the smoke test: a real TLS handshake over a real TCP socket.
+# Note `default-features = false` here too — tokio-rustls' default is
+# ["logging", "tls12", "aws_lc_rs"], i.e. yet another way into the provider
+# trap.
+tokio-rustls = { version = "0.26.4", default-features = false, features = ["ring", "tls12", "logging"] }
+tokio = { version = "1", features = ["net", "io-util", "macros", "rt", "rt-multi-thread", "time"] }
+# The test vectors (§6.14) are JSON and are read/written by the test.
+serde_json = "1"

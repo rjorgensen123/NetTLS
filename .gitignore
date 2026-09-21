@@ -1,0 +1,24 @@
+# ── Rust / Cargo ──
+/target/
+debug/
+**/*.rs.bk
+*.pdb
+# Cargo.lock is committed on purpose: a security-sensitive crate wants reproducible builds
+
+# ── Python (python/nettls.py — the other half of the §6 contract) ──
+# .pyc files are machine-specific (cpython-312, pytest-9.1.1) and were COMMITTED
+# here for a while — which put them in `cargo package`, and so into the published
+# crate. A crate that commits Cargo.lock for the sake of reproducible builds has
+# no business shipping bytecode from one developer's machine in the tarball.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+/python/.venv/
+
+# ── Editor / OS ──
+/.idea/
+/.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db

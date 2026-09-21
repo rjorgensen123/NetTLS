@@ -1,0 +1,34 @@
+# cargo-deny — an audit of the dependency tree (added in the 0.8.2 module round).
+# Run in CI (`cargo deny check`): a vulnerable or wrongly-licensed dependency
+# should topple the build, not be discovered afterwards.
+
+[advisories]
+yanked = "deny"
+
+[licenses]
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+]
+confidence-threshold = 0.9
+
+[bans]
+multiple-versions = "warn"
+# The provider trap is this crate's most important job: aws-lc must never arrive
+# through the back door.
+deny = [{ name = "aws-lc-rs" }, { name = "aws-lc-sys" }, { name = "rsa" }]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+# crates.io only. A private registry is infrastructure, and infrastructure does
+# not belong in a file that ships with the crate — an in-house CI appends its own
+# index here at runtime, from a secret, so the address lives where addresses
+# belong and not in a public repository.
+allow-registry = [
+    "https://github.com/rust-lang/crates.io-index",
+]

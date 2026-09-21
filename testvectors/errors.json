@@ -1,0 +1,711 @@
+{
+  "_about": "Normative error corpus (§6.14b). Every entry MUST be rejected by BOTH implementations — with an error, never a panic. The baseline is a valid message with real signatures; each entry is one mutation of it, so the rejection can be attributed to exactly that mutation.",
+  "_valid": {
+    "announcement": {
+      "v": "nettls-rotate/v2",
+      "announcer": "gateway",
+      "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+      "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+      "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+      "sent_at": 1700000000,
+      "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+      "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+      "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+    },
+    "receipt": {
+      "v": "nettls-rotate-ack/v2",
+      "acker": "service",
+      "announcer": "gateway",
+      "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+      "sent_at": 1700000001,
+      "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+    },
+    "approval": {
+      "v": "nettls-approve/v1",
+      "peer": "gateway",
+      "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+      "approved_by": "operator",
+      "timestamp": 1700000002,
+      "key_id": "portal",
+      "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+    },
+    "prev_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhRAw4/3bbtzfEST6qHk3f0NZ4Fq0zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMDAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMwMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5pAWqWbPrC8G\neo2YcHcCFHJQ6APoan3O0yENB8TLsWjvh4mTAf4srtjRMyoQflbNdz4p5sWKnHQ9\nUluk02hNjKMRMA8wDQYDVR0RBAYwBIICYzAwCgYIKoZIzj0EAwIDSAAwRQIgHVx8\nR78s5/ejPyPRiAKPpIvwvMTMDB8bdQpb94cuUk4CIQCvaInlK/931HbX3mXwub6z\nX5YqHnYF0dOOJG2IQz7JlQ==\n-----END CERTIFICATE-----\n",
+    "curr_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhREenDtoGiF1LSI4gEAob08P/Q1zzAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMTAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMxMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcE9dILl8dNP6\nMoGCT179rSLA4jnb+mSGnGNADXXzsiihCIKMd9pTC5jP3iH0CUT3Abs1DTd3qBTi\n2eKadowXLqMRMA8wDQYDVR0RBAYwBIICYzEwCgYIKoZIzj0EAwIDSAAwRQIhAPqT\nHjx55YoMtogq2XgHGh8g3w3vIFcjgL47RrDHgzUDAiAeQ5opi92xUQljxVEV6Zf4\n5unzPazZCFjoqRVDDkc/Tg==\n-----END CERTIFICATE-----\n",
+    "ed25519_seed": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "ed25519_pub": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8"
+  },
+  "announcement": [
+    {
+      "name": "wrong_version",
+      "field": "v",
+      "why": "wrong message version",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v1",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "empty_version",
+      "field": "v",
+      "why": "empty message version",
+      "level": "parse",
+      "json": {
+        "v": "",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_newline",
+      "field": "announcer",
+      "why": "a newline would split the field into two lines and move content within the canonical string without touching the signature",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway\nfake",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_c1_control_char",
+      "field": "announcer",
+      "why": "U+0085 NEL is category Cc — Python let it through until 2026-08-11",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_empty",
+      "field": "announcer",
+      "why": "empty name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_too_long",
+      "field": "announcer",
+      "why": "the name is over the 32-char limit",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_uppercase",
+      "field": "announcer",
+      "why": "component names are [a-z0-9-] — uppercase rejected (§6.5)",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "Gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "announcer_underscore",
+      "field": "announcer",
+      "why": "component names are [a-z0-9-] — underscore rejected (§6.5)",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gate_way",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "curr_fp_uppercase",
+      "field": "curr_fingerprint",
+      "why": "fingerprints are written in lowercase (§6.5) — otherwise two implementations can produce different bytes for the same value",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "B269F0E5BA06BCFBA6CE57FC560A76FEC7801EAE2F8ED6B3164B9389D54F016B",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "curr_fp_too_short",
+      "field": "curr_fingerprint",
+      "why": "fingerprint too short",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "abc",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "curr_fp_with_prefix",
+      "field": "curr_fingerprint",
+      "why": "the «sha256:» prefix does not belong in the field",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "sha256:b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "curr_fp_not_hex",
+      "field": "curr_fingerprint",
+      "why": "64 chars, but not hex",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "new_fp_too_short",
+      "field": "new_fingerprint",
+      "why": "fingerprint too short",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "abc",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "sig_curr_multibyte_utf8",
+      "field": "sig_curr",
+      "why": "multi-byte UTF-8 in a hex field — felled Rust with a panic until 2026-08-11, while Python gave an orderly error",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "a€",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "sig_curr_odd",
+      "field": "sig_curr",
+      "why": "odd number of hex chars",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "abc",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "sig_curr_empty",
+      "field": "sig_curr",
+      "why": "empty signature",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "sig_curr_uppercase",
+      "field": "sig_curr",
+      "why": "hex in uppercase",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100FA3F341B042F3AD89E8C4C311B0A8AC8EE080E8458B6BDFEEE8319D8FA339DE4022100FE2260483562D0CFFD5F5882356C31A0FEFF4DC15DE7B7C8B71D346B4C116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "sig_curr_not_hex",
+      "field": "sig_curr",
+      "why": "non-hex chars",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "half_announcement_missing_sig_prev",
+      "field": "sig_prev",
+      "why": "prev_fingerprint without sig_prev is half an announcement — we do not guess at what was meant",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9"
+      }
+    },
+    {
+      "name": "half_announcement_missing_prev_fp",
+      "field": "prev_fingerprint",
+      "why": "sig_prev without prev_fingerprint is the same half announcement the other way",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "two_certificates_in_pem",
+      "field": "new_cert_pem",
+      "why": "two certificates in the PEM — an announcement carries exactly one, otherwise it is unclear which one gets pinned",
+      "level": "verify",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "empty_pem",
+      "field": "new_cert_pem",
+      "why": "empty PEM",
+      "level": "verify",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "garbage_in_pem",
+      "field": "new_cert_pem",
+      "why": "the PEM framing is there, but the content is not a certificate",
+      "level": "verify",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nxx\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    },
+    {
+      "name": "new_fp_does_not_match_pem",
+      "field": "new_fingerprint",
+      "why": "valid FORM, but not the fingerprint of the certificate that comes with it — exactly the binding §6.5 exists to enforce",
+      "level": "verify",
+      "json": {
+        "v": "nettls-rotate/v2",
+        "announcer": "gateway",
+        "curr_fingerprint": "b269f0e5ba06bcfba6ce57fc560a76fec7801eae2f8ed6b3164b9389d54f016b",
+        "new_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+        "new_cert_pem": "-----BEGIN CERTIFICATE-----\nMIIBLDCB06ADAgECAhQlDAsTH2O/QKT5YM39g8zTYo0l3zAKBggqhkjOPQQDAjAN\nMQswCQYDVQQDDAJjMjAeFw0yNjA5MjEwOTQ4NTFaFw0yNjEwMjExMDQ4NTFaMA0x\nCzAJBgNVBAMMAmMyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1c51RQFuNewO\nR2V2eHoApn/8GQJxoia5B/Xza+mAxQVPe61Pd0SuLIZ2slFgPwf3KcdvdkVkps5m\nCiRC5Wic4qMRMA8wDQYDVR0RBAYwBIICYzIwCgYIKoZIzj0EAwIDSAAwRQIhAL+L\nMoSGvmtPJthSEN6lE9hu86wJCqAF0QC0KiIhBgQ5AiAI2XM53yWIpD5vA0d7Idkq\nnkuJ5DWeCJ1esNvGkSMSrg==\n-----END CERTIFICATE-----\n",
+        "sent_at": 1700000000,
+        "sig_curr": "3046022100fa3f341b042f3ad89e8c4c311b0a8ac8ee080e8458b6bdfeee8319d8fa339de4022100fe2260483562d0cffd5f5882356c31a0feff4dc15de7b7c8b71d346b4c116614",
+        "prev_fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "sig_prev": "3046022100a90cceedc8fa1b6e68c19e93ba65983f13822f021e0b9de1fdf3f073efd86998022100d4ca234445a1e2cacbda0b7519c831bbb61bd844b5fd7cb8e6f13904afd70c54"
+      }
+    }
+  ],
+  "receipt": [
+    {
+      "name": "ack_wrong_version",
+      "field": "v",
+      "why": "wrong message version",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v1",
+        "acker": "service",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+      }
+    },
+    {
+      "name": "ack_acker_newline",
+      "field": "acker",
+      "why": "newline in a name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "gateway\nfake",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+      }
+    },
+    {
+      "name": "ack_acker_c1",
+      "field": "acker",
+      "why": "C1 control character in a name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "gateway",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+      }
+    },
+    {
+      "name": "ack_announcer_empty",
+      "field": "announcer",
+      "why": "empty name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "service",
+        "announcer": "",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+      }
+    },
+    {
+      "name": "ack_fp_too_short",
+      "field": "new_fingerprint",
+      "why": "too short",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "service",
+        "announcer": "gateway",
+        "new_fingerprint": "0000000000",
+        "sent_at": 1700000001,
+        "sig": "3b209388043d7d6cca50f864a67d3dd4ec8d4b13eaa7d1beea2ff5599525cae533165e32191bd65242e661718c8f42640510d8dd814c223a59c2937374846c0d"
+      }
+    },
+    {
+      "name": "ack_sig_multibyte",
+      "field": "sig",
+      "why": "multi-byte UTF-8 in a hex field",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "service",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "a€"
+      }
+    },
+    {
+      "name": "ack_sig_empty",
+      "field": "sig",
+      "why": "empty signature",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "service",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": ""
+      }
+    },
+    {
+      "name": "ack_sig_uppercase",
+      "field": "sig",
+      "why": "hex in uppercase",
+      "level": "parse",
+      "json": {
+        "v": "nettls-rotate-ack/v2",
+        "acker": "service",
+        "announcer": "gateway",
+        "new_fingerprint": "3765c30f7fcf81c2b4ed0f41733e65dc4646e56467763dd22a5435bff68be248",
+        "sent_at": 1700000001,
+        "sig": "3B209388043D7D6CCA50F864A67D3DD4EC8D4B13EAA7D1BEEA2FF5599525CAE533165E32191BD65242E661718C8F42640510D8DD814C223A59C2937374846C0D"
+      }
+    }
+  ],
+  "approval": [
+    {
+      "name": "ap_wrong_version",
+      "field": "v",
+      "why": "wrong message version",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v2",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_peer_newline",
+      "field": "peer",
+      "why": "newline in a name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway\nfake",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_peer_c1",
+      "field": "peer",
+      "why": "C1 control character in a name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_approved_by_newline",
+      "field": "approved_by",
+      "why": "newline in «who approved» — the field sits inside the signature precisely to say who acted",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "gateway\nfake",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_approved_by_empty",
+      "field": "approved_by",
+      "why": "empty name",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_fp_too_short",
+      "field": "fingerprint",
+      "why": "fingerprint too short",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "abc",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_key_id_newline",
+      "field": "key_id",
+      "why": "newline in key_id",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "gateway\nfake",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_key_id_empty",
+      "field": "key_id",
+      "why": "empty key_id",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "",
+        "sig": "e26fb8f1d638f0fd9c0e3c6e46dfa10179f512522d13b567accde59c18372c5cd3b02d8c999df7deb0295741c24950a9ece3dcc3b0de17f2f79fb9e947880c08"
+      }
+    },
+    {
+      "name": "ap_sig_multibyte",
+      "field": "sig",
+      "why": "multi-byte UTF-8 in a hex field",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "a€"
+      }
+    },
+    {
+      "name": "ap_sig_odd",
+      "field": "sig",
+      "why": "odd number of hex chars",
+      "level": "parse",
+      "json": {
+        "v": "nettls-approve/v1",
+        "peer": "gateway",
+        "fingerprint": "6542fce0513bcd6f3d2fe9c766a2c50d7d5c95de6c84fba0b74bb43d72d101c9",
+        "approved_by": "operator",
+        "timestamp": 1700000002,
+        "key_id": "portal",
+        "sig": "abc"
+      }
+    }
+  ]
+}

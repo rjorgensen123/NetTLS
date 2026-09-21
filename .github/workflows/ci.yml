@@ -1,0 +1,150 @@
+# CI for nettls on GitHub. Runs on every push to main and on pull requests.
+#
+# WHERE `krypto` COMES FROM. The manifest carries both a path to a sibling
+# checkout and a registry entry, because that is how the two crates are developed
+# together. Neither is right for a runner, so each CI resolves the dependency from
+# the registry it can actually reach: this one from crates.io, the in-house one
+# from the private registry. That is not two different crates — it is the same
+# crate seen from two sides, and both answers are worth having. The private
+# registry is where a release can be tested before it goes anywhere; crates.io is
+# what everyone else will actually get.
+#
+# The jobs run in a container rather than on the runner directly, for one reason:
+# key material is held in `krypto`'s locked buffers, which mlock their pages and
+# fail closed when they cannot. With the default memlock limit those tests fail
+# for the wrong reason.
+#
+# Two things in this crate make a silent regression expensive, and the whole point
+# of running CI is that the tests covering them actually get run:
+#
+#   1. THE PROVIDER TRAP. rustls fails CLOSED when zero or more than one crypto
+#      provider is compiled in, and cargo features are additive — so a single new
+#      dependency without `default-features = false` can pull a second provider in
+#      through the back door. The symptom appears at the first handshake, which is
+#      to say after rollout. The fence is a test in the crate, not a grep step
+#      here, so it travels to everyone who builds it.
+#
+#   2. THE CONTRACT WITH THE PYTHON SIDE. The crate ships two implementations of
+#      the same wire protocol — `src/` and `python/nettls.py` — and they have
+#      drifted apart before. A cross-test caught it; reading did not. So both
+#      sides run here, against the vectors and against each other.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    container:
+      image: rust:1-bookworm
+      options: --ulimit memlock=-1:-1
+    steps:
+      - uses: actions/checkout@v4
+
+      # `cargo fetch` re-resolves conservatively: only the krypto entry changes
+      # source, everything else stays pinned — which `--locked` then guards.
+      - name: Resolve krypto from crates.io
+        run: |
+          sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+          cargo fetch
+
+      - name: Add clippy + rustfmt
+        run: rustup component add clippy rustfmt
+
+      - name: Format check
+        run: cargo fmt --all --check
+
+      # `-D warnings`: a warning left standing becomes noise nobody reads, and a
+      # local `cargo test` shows it as something you skim past.
+      - name: Clippy (warnings are errors)
+        run: cargo clippy --all-targets --locked -- -D warnings
+
+      # Includes the provider fence and a real TLS handshake over a real TCP
+      # socket — the right fingerprint gets through, the wrong one is stopped.
+      - name: Test
+        run: cargo test --locked --all-targets
+
+      # Pinned, like the Rust side: python/krav-ci.txt fixes exact versions,
+      # transitives included. `cryptography` is not a test dependency — it IS the
+      # crypto implementation on the Python side, and an unannounced version drift
+      # there is as serious as one in Cargo.lock.
+      - name: Python + dependencies (pinned versions)
+        run: |
+          apt-get update -qq && apt-get install -y -qq python3 python3-pip python3-venv
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install -q --upgrade pip
+          /tmp/venv/bin/pip install -q -r python/krav-ci.txt
+
+      # The vectors are the answer key, not a byproduct of the Rust code. If one
+      # fails, the question is which side is right — not that Python must fall in
+      # line. Ed25519 is deterministic, so the signatures are compared byte for
+      # byte, which is a far tighter probe than "does it verify".
+      - name: Conformance — the vectors, byte for byte
+        run: /tmp/venv/bin/python -m pytest python/test_nettls.py -q
+
+      # Everything above probes VALID values, and an attacker does not live there.
+      # Two divergences arose without any test seeing them, both in the handling of
+      # the invalid. One shared corpus, read by both sides: separate lists would let
+      # each side probe its own cases and the divergence would survive.
+      - name: The error corpus
+        run: /tmp/venv/bin/python -m pytest python/test_feil.py -q
+
+      # Behaviour tests assume the function exists on both sides. If it is missing
+      # in Python there is nothing to compare, and everything is green. This one
+      # requires every public element to be either mirrored or explicitly
+      # justified, and fails the build if something is added without a position.
+      - name: Parity Rust <-> Python
+        run: /tmp/venv/bin/python -m pytest python/test_paritet.py -q
+
+      # The vectors catch errors the two implementations SHARE. The cross-test
+      # catches errors where they DISAGREE — a signature from one that does not
+      # hold at the other. Neither covers the other's case.
+      - name: Cross-test Rust <-> Python
+        run: /tmp/venv/bin/python -m pytest python/test_krysstest.py -q
+
+      # Rotation around a ring of nodes, in five configurations: mixed rings, and
+      # pure rings of each implementation alone. A mixed ring can hide a fault if
+      # one side is lenient where the other is strict; a pure ring cannot. The
+      # error corpus is injected mid-flight, while nodes hold three certificate
+      # generations at once, and the requirement is not only that the message is
+      # rejected but that the state is unchanged and the ring keeps turning.
+      - name: Ring test — five configurations, with error injection
+        run: /tmp/venv/bin/python -m pytest python/test_ring.py -q
+
+      # Finding a packaging problem here is cheap; finding it after a publish is
+      # not, since a version number can never be reused. `--allow-dirty` is
+      # required because the step above edits Cargo.toml by our own hand — the
+      # dirt is known and bounded to exactly that.
+      - name: Package check
+        run: cargo package --locked --allow-dirty
+
+  # Dependency audit: RustSec advisories, license allowlist, bans and source
+  # control. The bans matter more here than in most crates — a second crypto
+  # provider arriving through a transitive dependency is the failure this crate
+  # exists to prevent. Configuration lives in deny.toml.
+  deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # A pinned binary rather than a third-party action. An action runs with
+      # access to this repository and can change under its own tag; a release
+      # artifact at a fixed version cannot.
+      - name: Fetch cargo-deny
+        run: |
+          curl -sSfL -o /tmp/cd.tgz \
+            https://github.com/EmbarkStudios/cargo-deny/releases/download/0.20.2/cargo-deny-0.20.2-x86_64-unknown-linux-musl.tar.gz
+          tar -xzf /tmp/cd.tgz -C /tmp --strip-components=1
+          install /tmp/cargo-deny /usr/local/bin/
+
+      - name: Resolve krypto from crates.io
+        run: sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+
+      - name: cargo deny check
+        run: cargo deny check
