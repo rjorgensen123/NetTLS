@@ -51,7 +51,7 @@ jobs:
       # source, everything else stays pinned — which `--locked` then guards.
       - name: Resolve krypto from crates.io
         run: |
-          sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+          sed -i 's|path = "\.\./krypto", ||' Cargo.toml
           cargo fetch
 
       - name: Add clippy + rustfmt
@@ -144,7 +144,7 @@ jobs:
           install /tmp/cargo-deny /usr/local/bin/
 
       - name: Resolve krypto from crates.io
-        run: sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+        run: sed -i 's|path = "\.\./krypto", ||' Cargo.toml
 
       - name: cargo deny check
         run: cargo deny check

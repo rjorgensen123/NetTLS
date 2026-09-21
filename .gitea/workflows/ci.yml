@@ -68,7 +68,7 @@ jobs:
       # --locked).
       - name: Registry dep instead of path dep
         run: |
-          sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+          sed -i 's|path = "\.\./krypto", ||' Cargo.toml
           cargo fetch
 
       - name: Add clippy + rustfmt
@@ -209,7 +209,7 @@ jobs:
       # Same path-strip as build-test — the sibling dir does not exist in CI.
       - name: Registry deps instead of path deps
         run: |
-          sed -i 's|path = "\.\./krypto", ||; s|, registry = "gitea"||' Cargo.toml
+          sed -i 's|path = "\.\./krypto", ||' Cargo.toml
           cargo fetch
 
       - name: Fetch cargo-deny
