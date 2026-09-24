@@ -30,30 +30,6 @@ continuity, signed receipts, generation pairs and an operator anchor.
   [`docs/Usage.md`](docs/Usage.md); overview: [`docs/Home.md`](docs/Home.md).
 - **Changes:** [`CHANGELOG.md`](CHANGELOG.md) · **Version:** declared once, in [`Cargo.toml`](Cargo.toml)
 
-> **0.8.0 is the krypto 0.5 migration:** the crate no longer carries a primitive of its own —
-> signatures, X25519, hex, SHA-256, `ct_eq` and CSPRNG bytes are `krypto`'s (`ring` and
-> `x25519-dalek` left the manifest). Seeds and recipient keys now cross the API as
-> `krypto::SecretBuf` (the secret-types rule). Wire bytes and all test vectors are unchanged — proven
-> without regenerating a single vector. **⚠ Lockbox files and envelopes written with krypto
-> ≤ 0.4.4 (AEGIS default) must be re-created** — krypto 0.5.0 fixed a key/nonce swap in the
-> AEGIS layer. Details in `CHANGELOG.md` under `[0.8.0]`.
-
-> **0.7.0 is the language switch — code AND wire:** the entire crate is English, and (decided
-> 2026-08-15, before first adoption) the wire's JSON keys, the mode value (`"rolling"`), the
-> vector/corpus vocabulary and the KDF labels switched too. **The signed canonical bytes are
-> unchanged** — proven by the regenerated vectors carrying byte-identical `canonical_hex`
-> values. The migration tables — including the Norwegian ⇄ English wire table on single lines,
-> kept only through the transition — are in `CHANGELOG.md` under `[0.7.0]`.
-
-> Status: the full §6 protocol (announcement, receipt, generations, announcer, lockbox,
-> envelope), private keys in locked memory and the consumer-chosen transport cipher are built, with normative
-> test vectors and Rust↔Python cross-tests (CI-pinned dependencies; the suite includes version
-> and doc guards), `clippy -D warnings` clean, `forbid(unsafe_code)`.
-> Tests include **real TLS handshakes over TCP**: the right fingerprint gets through (TLS 1.3,
-> ALPN `h2`), the wrong one is rejected, a rotating server admits a client whose trust
-> state accepts the new generation and rejects one that does not, and a certificate can be swapped **mid-flight** without
-> tearing down open connections. Which services use it, and how far each has adopted the
-> rotation, is those services' business — their own docs say so; this crate's docs do not track it.
 
 ## Why does the crate exist?
 
@@ -207,7 +183,9 @@ python python/ringnode.py      # the ring: N nodes rotating against each other (
 
 Design, architecture and structure; the security model and what it means to fail closed; the
 contracts the crate presents outwards; and the decisions about what it does and deliberately
-does not do. The code is written by Claude AI (Opus and Fable).
+does not do. 
+
+The code is written by Claude AI (Opus and Fable).
 
 Reviewed independently by DeepSeek, Qwen, Gemini and Fable.
 
