@@ -146,9 +146,19 @@ The tests also cover the cheating attempts: a confirmation signed with the wrong
 even when it otherwise looks right, and one where a single character was altered afterwards is
 rejected too.
 
-**Caveat:** the rotation itself has been adopted by a reference app, not yet by the services it
-was built for. That channel has already caught one real bug — the previous
-key not surviving a restart. Wiring the rotation into the services is its own set of tasks.
+
+## Author
+
+**Roger Jorgensen** — rogerj@gmail.com
+
+Design, architecture and structure; the security model and what it means to fail closed; the
+contracts the crate presents outwards; and the decisions about what it does and deliberately
+does not do. 
+
+The code is written by Claude AI (Opus and Fable).
+
+Reviewed independently by DeepSeek, Qwen, Gemini and Fable.
+
 
 ## License
 
